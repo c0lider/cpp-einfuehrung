@@ -2,7 +2,7 @@
 
 # Vocabulary and other small notes
 - member function = method (function that operates on objects)
-- `~`on a mac keyboard -> [option] + n
+- `~` on a mac keyboard -> [option] + n
 - `using namespace std;` is considered a bad practice
 - use the `-std=c++11` command parameter to compile using c++ 11
 
@@ -68,6 +68,14 @@ public:
 ```
 > It is possible to directly initialize non-static or reference members before going into the constructor body via the above syntax.
 
+## The Copy Constructor
+In C++ there is a so called "copy constructor", that allows for shallow object copies. It copies all member variables from the original object to the newly created one and uses the following syntax:
+```c++
+MyObject originalObj{param1, param2};
+MyObject copiedObj{originalObj};
+```
+>***Important:*** It only creates a shallow copy and causes trouble with dynamically allocated memory and pointers.
+
 ## Ways to instantiate a class
 ```c++
 MyClass obj;  // Object created on the stack (i.e. the object is automatically deleted after leaving its scope)
@@ -78,7 +86,27 @@ static MyClass obj;  // Object with static storage duration, is created once the
 ```
 > If an class is instantiated using the `new`operator, its member functions have to be called using the `->` operator, since it provides a pointer to the created class instance.
 
-## 
+## Friend keyword
+The friend keyword grants the `FriendClass` access to its private and protected members. It usually is not needed and considered bad practice to use it.
+```c++
+class MyClass {
+private:
+    int privateData;
+
+public:
+    friend class FriendClass;  // Declaration of a friend class
+};
+
+```
+
+## Raw-Strings
+
+```c++
+char* multiLineString = R"(Escape symbols like \n will be ignored.
+Instead "real" line breaks will be used and it is even possible to use 
+quotation marks inside raw strings.)";
+```
+>Available in c++11 or higher.
 
 # Makefile
 If no argument is passed to the `make` command, the first entry will be executed.
