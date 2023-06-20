@@ -74,7 +74,14 @@ In C++ there is a so called "copy constructor", that allows for shallow object c
 MyObject originalObj{param1, param2};
 MyObject copiedObj{originalObj};
 ```
->***Important:*** It only creates a shallow copy and causes trouble with dynamically allocated memory and pointers.
+>***Important:*** By deafult it only creates a shallow copy and causes trouble with dynamically allocated memory and pointers.
+
+```c++
+MyClass(const MyClass& otherMyClassObject) {
+    // implementation of copy constructor
+}
+```
+
 
 ## Ways to instantiate a class
 ```c++
@@ -107,6 +114,43 @@ Instead "real" line breaks will be used and it is even possible to use
 quotation marks inside raw strings.)";
 ```
 >Available in c++11 or higher.
+
+## Access Modifier
+This is the preferred order for public and private methods and members.
+```c++
+class Example {
+private: 
+    int privateInt;
+    // ...
+public:
+    int publicInt;
+    //...
+public:
+    void publicMethod() {
+        //...
+    }
+private:
+    void privateMethod() {
+        //...
+    }
+}
+```
+
+## Operator overloading
+```c++
+class MyClass{
+public:
+    MyClass& operator=(const MyClass& other);
+    
+    bool operator>(const MyClass& other) const;
+    bool operator>=(const MyClass& other) const;
+    bool operator<(const MyClass& other) const;
+    bool operator<=(const MyClass& other) const;
+    
+    friend std::istream& operator>>(std::istream& input, MyClass& myObj);
+    friend std::ostream& operator<<(std::ostream& output, const MyClass& myObj);
+}
+```
 
 # Makefile
 If no argument is passed to the `make` command, the first entry will be executed.
