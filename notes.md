@@ -152,5 +152,76 @@ public:
 }
 ```
 
+## Inheritance
+To create a derived class in C++, you use the colon (:) followed by the access specifier (public, protected, or private) and the base class name. The access specifier determines the visibility of the base class members in the derived class.
+
+```c++
+class DerivedClass: access-modifier BaseClass {
+
+};
+```
+
+You can call methods from the base class using the following syntax:
+```c++
+class Derived : public Base {
+public:
+    void derivedMethod() {
+        Base::baseMethod();
+        // ...
+    }
+}
+```
+
+
+## Overriding and virtual methods
+The following code segments will show the difference between using the keyword `virtual` and not using it when overriding methods:
+
+```c++
+class Base {
+public:
+    // WITH virtual
+    virtual void method() {
+        cout << "Base::method()" << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void method() override {
+        cout << "Derived::method()" << endl;
+    }
+};
+
+int main() {
+    Base* ptr = new Derived();
+    ptr->method();  // Prints "Derived::method()"
+}
+
+```
+
+```c++
+class Base {
+public:
+    // WITHOUT virtual
+    void method() {
+        cout << "Base::method()" << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void method() {
+        cout << "Derived::method()" << endl;
+    }
+};
+
+int main() {
+    Base* ptr = new Derived();
+    ptr->method();  // Prints "Base::method()"
+}
+```
+> The `override` keyword is only needed in the definition but not the implementation!
+
 # Makefile
-If no argument is passed to the `make` command, the first entry will be executed.
+- If no argument is passed to the `make` command, the first entry will be executed.
+- On windows machines the convention is to name the file "Makefile" with a capital 'M'. Otherwise use a lower case 'm'
