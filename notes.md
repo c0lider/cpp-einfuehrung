@@ -5,10 +5,13 @@
 - `~` on a mac keyboard -> [option] + n
 - `using namespace std;` is considered a bad practice
 - use the `-std=c++11` command parameter to compile using c++ 11
+- `cmath` provides math functions like ceil, floor or round
 
 # Code snippets
 
 ## Constructor overloading
+
+>___NOTE:___ Derived classes don't automatically inherit constructors!
 ```c++
 class MyClass {
 public:
